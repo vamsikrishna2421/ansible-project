@@ -12,7 +12,9 @@
    tasks:
        - name: Install the apache2 and mysql servers
          apt:
-            name: ["apache2","mysql-server"] 
+            name: 
+               - apache2 
+               - mysql-server
             state: present
          when: ansible_os_family=="Debian"
          notify: start webserver and mysql for ubuntu
@@ -21,16 +23,16 @@
             name: ["{{webserver_redhat}}","mysql-server"] 
             state: present
          when: ansible_os_family=="RedHat"
-         notify: start webserver and mysql for redhat
+         notify: [start webserver and mysql for redhat]
    handlers: 
        - name: start webserver and mysql for ubuntu
-         service:
-            name: ["apache2","mysql-server"] 
-            state: started
+         service: name="httpd","mysql-server" state=started enabled=yes 
          when: ansible_os_family=="Debian"
        - name: start webserver and mysql for redhat
          service:
-            name: ["httpd","mysql-server"]
+            name: 
+               - httpd
+               - mysql-server
             state: started
          when: ansible_os_family=="RedHat"
 ...
