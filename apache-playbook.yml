@@ -1,0 +1,36 @@
+---
+ - name: install and configure apache2
+   hosts:  vamsi
+   user: ansible
+   become: true
+   gather_facts: yes
+   connection: ssh
+   vars:
+       webserver_ubuntu: apache2
+       webserver_redhat: httpd
+   
+   tasks:
+       - name: Install the apache2 and mysql servers
+         apt:
+            name: ["apache2","mysql-server"] 
+            state: present
+         when: ansible_os_family=="Debian"
+         notify: start webserver and mysql for ubuntu
+       - name: Install the httpd and mysql servers
+         yum:
+            name: ["{{webserver_redhat}}","mysql-server"] 
+            state: present
+         when: ansible_os_family=="RedHat"
+         notify: start webserver and mysql for redhat
+   handlers: 
+       - name: start webserver and mysql for ubuntu
+         service:
+            name: ["apache2","mysql-server"] 
+            state: started
+         when: ansible_os_family=="Debian"
+       - name: start webserver and mysql for redhat
+         service:
+            name: ["httpd","mysql-server"]
+            state: started
+         when: ansible_os_family=="RedHat"
+...
