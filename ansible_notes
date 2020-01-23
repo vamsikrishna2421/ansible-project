@@ -14,7 +14,9 @@ Note − Windows does not support control machine.
 By default, Ansible uses ssh to manage remote machine.
 
 
-3.Ansible does not add any database. It does not require any daemons to start or keep it running. While managing remote machines, Ansible does not leave any software installed or running on them. Hence, there is no question of how to upgrade it when moving to a new version.
+3.Ansible does not add any database. It does not require any daemons to start or keep it running.
+While managing remote machines, Ansible does not leave any software installed or running on them.
+Hence, there is no question of how to upgrade it when moving to a new version.
 
 4.Installation through Apt on Ubuntu Machine
 $ sudo apt-get update 
@@ -23,7 +25,7 @@ $ sudo apt-add-repository ppa:ansible/ansible
 $ sudo apt-get update 
 $ sudo apt-get install ansible
 
-5. run Ansible–version to check the version
+5. run [ $ansible --version ] to check the version
 
 
 😎️ANSIBLE _ YAML BASICS
