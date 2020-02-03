@@ -1,0 +1,7 @@
+--- 
+- hosts: vamsi
+  become: true
+  roles:
+        - apache
+#       - ntp
+
